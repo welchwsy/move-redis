@@ -1,0 +1,27 @@
+{
+  "name": "move-redis",
+  "version": "0.0.1",
+  "description": "one move redis script",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^1.5.0",
+    "redis": "^2.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node simple"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/welchwsy/move-redis.git"
+  },
+  "keywords": [
+    "redis"
+  ],
+  "author": "welchwsy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/welchwsy/move-redis/issues"
+  },
+  "homepage": "https://github.com/welchwsy/move-redis#readme"
+}
