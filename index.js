@@ -133,21 +133,22 @@ RedisMove.prototype.move = function (next) {
 						break;
 					case 'list':
 						list++;
-						_MoveRedis.getClientFrom().lrange(key, 0,-1,function (err, value) {
-							async.eachSeries(value, function iterator(item, next) {
-								_MoveRedis.getClientTo().RPUSH(key, item, function (err, result) {
-									next(err, result);
-								});
-							}, function (err, result) {
-								if (err) { 
-									console.log("ERROR", err);
-									next(err,null);
+						_MoveRedis.getClientFrom().lrange(key, 0, -1, function (err, value) {
+							_MoveRedis.getClientTo().del(key, function (err, result) {
+								async.eachSeries(value, function iterator(item, next) {
+									_MoveRedis.getClientTo().RPUSH(key, item, function (err, result) {
+										next(err, result);
+									});
+								}, function (err, result) {
+									if (err) {
+										console.log("ERROR", err);
+										next(err, null);
 									}
-								else
-								{
-									next(err,result);
-								}
-							});
+									else {
+										next(err, result);
+									}
+								});
+							})
 						});
 						break;
 						
@@ -168,8 +169,7 @@ RedisMove.prototype.move = function (next) {
 						});
 						break;
 					default:
-						console.log("default:",key);
-						next("defalt",key)
+						next(null,key);
 						break;	
 				}
 			});
